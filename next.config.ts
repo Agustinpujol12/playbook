@@ -1,13 +1,10 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // --- Cambios para el despliegue en GitHub Pages ---
-  output: 'export',
-  basePath: '/playbook',
-
-  // --- Configuración de imágenes combinada ---
+  // Las configuraciones 'output: export' y 'basePath' han sido eliminadas.
+  
   images: {
-    unoptimized: true, // Necesario para la exportación estática
+    // Para Vercel, la optimización de imágenes funciona, así que quitamos 'unoptimized: true'.
     remotePatterns: [
       {
         protocol: 'https',
@@ -29,8 +26,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-
-  // --- Tu configuración original que se mantiene ---
   typescript: {
     ignoreBuildErrors: true,
   },
