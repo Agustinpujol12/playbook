@@ -18,7 +18,8 @@ export default function Home() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         {maps.map((map) => (
-          <Link href={`/${map.id}`} key={map.id} className="group">            <Card
+          <Link href={`/${map.id}`} key={map.id} className="group">
+            <Card
               className="overflow-hidden h-full flex flex-col transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-[1.03]"
               style={
                 {
