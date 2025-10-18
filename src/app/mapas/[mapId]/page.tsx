@@ -1,23 +1,20 @@
-// src/app/[mapId]/page.tsx
+// Imports para funciones del servidor (se ejecutan en el build)
+import { maps } from '@/app/lib/data'; 
 
-import { maps } from '@/app/lib/data';
-
-// --- CÓDIGO AÑADIDO PARA EL BUILD ESTÁTICO ---
-// Esta función le dice a Next.js qué páginas de mapas debe generar
+// Función del servidor para generar las páginas estáticas
 export async function generateStaticParams() {
   return maps.map((map) => ({
     mapId: map.id,
   }));
 }
-// --- FIN DEL CÓDIGO AÑADIDO ---
 
-
+// Límite entre servidor y cliente. ESTA LÍNEA DEBE IR AQUÍ.
 'use client';
 
+// Imports para el componente del cliente (se ejecutan en el navegador)
 import { useState, useMemo } from 'react';
 import { useParams, notFound } from 'next/navigation';
 import Link from 'next/link';
-// La importación de 'maps' se elimina de aquí porque ya está arriba
 import { strategies as allStrategies } from '@/app/lib/data';
 import type { Strategy, Side, MapId } from '@/app/lib/types';
 import StrategyList from '@/app/components/strategy-list';
@@ -25,6 +22,7 @@ import StrategyDetail from '@/app/components/strategy-detail';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+// El resto de tu componente (sin cambios)
 export default function MapPage() {
   const params = useParams();
   const mapId = params.mapId as MapId;
