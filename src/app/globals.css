@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 45 91% 72.7%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.5rem;
+
+    --tt-accent: 28 80% 52%;
+    --ct-accent: 207 68% 53%;
+    --map-dust2: 45 91% 72.7%;
+    --map-inferno: 216 71.4% 60%;
+    --map-mirage: 282 98.8% 52.7%;
+    --map-ancient: 127 54.2% 23.9%;
+    --map-train: 94 60.1% 52.9%;
+    --map-overpass: 36 90.1% 54.3%;
+    --map-nuke: 354 98.4% 41.6%;
+  }
+
+  .dark {
+    --background: 0 0% 11.8%; /* #1E1E1E */
+    --foreground: 0 0% 98%;
+    --card: 0 0% 14.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 11.8%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 45 91% 72.7%; /* #F8D479 - Dust 2 */
+    --primary-foreground: 0 0% 11.8%;
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 25%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 45 91% 72.7%;
+    
+    --tt-accent: 28 80% 52%; /* #E67E22 */
+    --ct-accent: 207 68% 53%; /* #3498DB */
+    --map-dust2: 45 91% 72.7%; /* #F8D479 */
+    --map-inferno: 216 71.4% 60%; /* #4A90E2 */
+    --map-mirage: 282 98.8% 52.7%; /* #9013FE */
+    --map-ancient: 127 54.2% 23.9%; /* #1B5E20 */
+    --map-train: 94 60.1% 52.9%; /* #7ED321 */
+    --map-overpass: 36 90.1% 54.3%; /* #F5A623 */
+    --map-nuke: 354 98.4% 41.6%; /* #D0021B */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

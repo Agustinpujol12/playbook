@@ -1,0 +1,58 @@
+{
+  "placeholderImages": [
+    {
+      "id": "map-dust2",
+      "description": "Background image for Dust 2 map card",
+      "imageUrl": "https://images.unsplash.com/photo-1631007076487-9fde05461c3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkZXNlcnQlMjBtYXB8ZW58MHx8fHwxNzYwNzYyNDQ2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "desert landscape"
+    },
+    {
+      "id": "map-inferno",
+      "description": "Background image for Inferno map card",
+      "imageUrl": "https://images.unsplash.com/photo-1632316630283-52b060e84ba8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxpdGFsaWFuJTIwdmlsbGFnZXxlbnwwfHx8fDE3NjA3NjI0NDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "italian village"
+    },
+    {
+      "id": "map-mirage",
+      "description": "Background image for Mirage map card",
+      "imageUrl": "https://images.unsplash.com/photo-1701527536277-7341836342ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtb3JvY2NhbiUyMGFyY2hpdGVjdHVyZXxlbnwwfHx8fDE3NjA3NjA4MzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "moroccan architecture"
+    },
+    {
+      "id": "map-ancient",
+      "description": "Background image for Ancient map card",
+      "imageUrl": "https://images.unsplash.com/photo-1550672393-76d16e9e5064?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxqdW5nbGUlMjBydWluc3xlbnwwfHx8fDE3NjA3MzU1ODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "jungle ruins"
+    },
+    {
+      "id": "map-train",
+      "description": "Background image for Train map card",
+      "imageUrl": "https://images.unsplash.com/photo-1605845801507-53c3c4fbdb6a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxyYWlseWFyZCUyMGluZHVzdHJpYWx8ZW58MHx8fHwxNzYwNzYzNTMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "railyard industrial"
+    },
+    {
+      "id": "map-overpass",
+      "description": "Background image for Overpass map card",
+      "imageUrl": "https://images.unsplash.com/photo-1542800952-e5471ed41326?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx1cmJhbiUyMHBhcmt8ZW58MHx8fHwxNzYwNzQyOTI5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "urban park"
+    },
+    {
+      "id": "map-nuke",
+      "description": "Background image for Nuke map card",
+      "imageUrl": "https://images.unsplash.com/photo-1468787737698-f5c03f0570dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxudWNsZWFyJTIwcGxhbnR8ZW58MHx8fHwxNzYwNzYyNDQ2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "nuclear plant"
+    },
+    {
+      "id": "diagram-dust2-split-b",
+      "description": "Diagram for Dust 2 Split B strategy",
+      "imageUrl": "https://images.unsplash.com/photo-1742228900252-4ec66498a53c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx0b3AtZG93biUyMG1hcHxlbnwwfHx8fDE3NjA3NjM1MzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "top-down map"
+    },
+    {
+      "id": "diagram-inferno-banana-take",
+      "description": "Diagram for Inferno Banana Control strategy",
+      "imageUrl": "https://images.unsplash.com/photo-1647032713701-a80d2b69e502?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8dGFjdGljYWwlMjBkaWFncmFtfGVufDB8fHx8MTc2MDc2MzUzMXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tactical diagram"
+    }
+  ]
+}
