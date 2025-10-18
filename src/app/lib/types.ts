@@ -14,8 +14,9 @@ export interface Strategy {
   name: string;
   description: string;
   videoUrl?: string;
-  imageUrl: string;
-  imageHint: string;
+  imageUrl?: string;
+  hoverVideoUrl?: string; // <-- LÍNEA AÑADIDA
+  imageHint?: string;     // <-- MODIFICADO a opcional
   grenadesNeeded: string[];
   players: PlayerRole[];
   alternatives?: string;
@@ -26,5 +27,5 @@ export interface MapInfo {
   name: string;
   colorHex: string;
   imageUrl: string;
-  imageHint: string;
+  imageHint?: string;     // <-- MODIFICADO a opcional
 }
