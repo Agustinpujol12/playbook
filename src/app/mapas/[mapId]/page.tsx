@@ -1,9 +1,24 @@
+// src/app/[mapId]/page.tsx
+
+import { maps } from '@/app/lib/data';
+
+// --- CÓDIGO AÑADIDO PARA EL BUILD ESTÁTICO ---
+// Esta función le dice a Next.js qué páginas de mapas debe generar
+export async function generateStaticParams() {
+  return maps.map((map) => ({
+    mapId: map.id,
+  }));
+}
+// --- FIN DEL CÓDIGO AÑADIDO ---
+
+
 'use client';
 
 import { useState, useMemo } from 'react';
 import { useParams, notFound } from 'next/navigation';
 import Link from 'next/link';
-import { maps, strategies as allStrategies } from '@/app/lib/data';
+// La importación de 'maps' se elimina de aquí porque ya está arriba
+import { strategies as allStrategies } from '@/app/lib/data';
 import type { Strategy, Side, MapId } from '@/app/lib/types';
 import StrategyList from '@/app/components/strategy-list';
 import StrategyDetail from '@/app/components/strategy-detail';
