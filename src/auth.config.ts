@@ -1,10 +1,11 @@
 // src/auth.config.ts
-import type { NextAuthOptions } from 'next-auth';
-import Credentials from 'next-auth/providers/credentials'; // ¡Nuevo import!
+
+import type { NextAuthOptions, User } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials'; 
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.AUTH_SECRET,
   providers: [
-    // ✅ AGREGA EL PROVEEDOR DE CREDENCIALES
     Credentials({
       name: 'Credenciales',
       credentials: {
@@ -12,24 +13,32 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Contraseña', type: 'password' }
       },
       async authorize(credentials) {
-        // Lógica de verificación:
-
-        // Por ahora, usamos la lógica de prueba con el usuario y contraseña "mnz"
-        if (credentials.username === 'mnz' && credentials.password === 'mnz') {
-          // Si las credenciales son válidas, retornamos el objeto de usuario.
-          return { id: 'user-1', name: 'Usuario MNZ', email: 'mnz@example.com', role: 'EDITOR' };
+        if (credentials?.username === 'mnz' && credentials?.password === 'mnz') {
+          // Retornamos el objeto de usuario con el rol para la sesión
+          return { 
+            id: 'user-1', 
+            name: 'Manuel Ortiz', 
+            email: 'manuortizz2003@gmail.com',
+            role: 'EDITOR' 
+          } as User; 
         }
-
-        // Si la autenticación falla, retorna null.
         return null;
       },
     }),
-    // ❌ QUITA EL BLOQUE DE DISCORD COMPLETO
   ],
+  // ⚠️ CRÍTICO: Los callbacks de JWT son necesarios sin el adaptador de DB.
   callbacks: {
-    async session({ session, user }) {
-      if (session.user && user.role) {
-        (session.user as any).role = user.role;
+    async jwt({ token, user }) {
+        if (user && (user as User).role) {
+            token.role = (user as User).role;
+            token.id = user.id;
+        }
+        return token;
+    },
+    async session({ session, token }) {
+      if (session.user && token.role) { 
+        (session.user as any).role = token.role;
+        session.user.id = token.id;
       }
       return session;
     },

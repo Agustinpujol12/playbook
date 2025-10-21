@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
 import prisma from '@/app/lib/prisma';
-import { auth } from '@/auth'; // <-- Obtenemos la sesión del usuario
-import { SignIn, SignOut } from '@/app/components/auth-components'; // <-- Botones de login/logout
+// ❌ Eliminadas: import { auth } from '@/auth'; 
+// ❌ Eliminadas: import { SignIn, SignOut } from '@/components/auth-components'; 
 
 // Función para obtener los mapas desde Prisma
 async function getMaps() {
@@ -14,23 +14,13 @@ async function getMaps() {
 }
 
 export default async function Home() {
+  // ❌ Eliminada: const session = await auth(); 
   const maps = await getMaps();
-  const session = await auth(); // <-- Obtenemos la sesión del usuario
 
   return (
     <main className="container mx-auto px-4 py-8 md:py-12">
-      {/* --- SECCIÓN DE LOGIN --- */}
-      <div className="absolute top-4 right-4">
-        {session?.user ? (
-          <div className="flex items-center gap-4">
-            <p className="text-sm text-muted-foreground">{session.user.name}</p>
-            <SignOut />
-          </div>
-        ) : (
-          <SignIn />
-        )}
-      </div>
-      {/* --- FIN DE LOGIN --- */}
+      
+      {/* ❌ ELIMINADA: Toda la sección de LOGIN que usaba session */}
 
       <header className="text-center mb-10 md:mb-16">
         <h1 className="font-headline text-4xl md:text-6xl font-bold tracking-tighter">
