@@ -1,17 +1,47 @@
-// Imports para funciones del servidor (se ejecutan en el build)
-import { maps } from '@/app/lib/data'; 
+// src/app/[mapId]/page.tsx
+import prisma from '@/app/lib/prisma';
+import PageClient from './page-client';
+import { notFound } from 'next/navigation';
 
-// Función del servidor para generar las páginas estáticas
 export async function generateStaticParams() {
+  const maps = await prisma.map.findMany({ select: { id: true } });
   return maps.map((map) => ({
     mapId: map.id,
   }));
 }
 
-// Importa el componente del cliente
-import MapPageClient from './page-client';
+async function getMapData(mapId: string) {
+  const map = await prisma.map.findUnique({
+    where: { id: mapId },
+  });
 
-// Renderiza el componente del cliente
-export default function MapPageWrapper({ params }: { params: { mapId: string } }) {
-  return <MapPageClient mapId={params.mapId} />;
+  if (!map) return null;
+
+  const strategies = await prisma.strategy.findMany({
+    where: { mapId: mapId },
+    include: {
+      playerRoles: true,
+    },
+  });
+
+  const strategiesWithPlayers = strategies.map(s => ({
+    ...s,
+    players: s.playerRoles
+  }));
+
+  return { map, strategies: strategiesWithPlayers };
+}
+
+// La prop 'params' ahora se maneja como una promesa
+export default async function MapPage({ params }: { params: Promise<{ mapId: string }> }) {
+  // --- LÍNEAS MODIFICADAS ---
+  const { mapId } = await params; // Primero esperamos los parámetros
+  const data = await getMapData(mapId); // Luego los usamos
+  // --- FIN DE LA MODIFICACIÓN ---
+
+  if (!data) {
+    notFound();
+  }
+  
+  return <PageClient map={data.map} strategies={data.strategies} />;
 }

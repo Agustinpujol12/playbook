@@ -1,10 +1,19 @@
+// src/app/page.tsx
 import Link from 'next/link';
 import Image from 'next/image';
-import { maps } from '@/app/lib/data';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
+import prisma from '@/app/lib/prisma'; // <-- Importamos nuestro conector
 
-export default function Home() {
+// Función para obtener los mapas desde la base de datos
+async function getMaps() {
+  const maps = await prisma.map.findMany();
+  return maps;
+}
+
+export default async function Home() {
+  const maps = await getMaps(); // <-- Obtenemos los mapas
+
   return (
     <main className="container mx-auto px-4 py-8 md:py-12">
       <header className="text-center mb-10 md:mb-16">
@@ -34,7 +43,6 @@ export default function Home() {
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover transition-transform duration-300 group-hover:scale-110"
-                  data-ai-hint={map.imageHint}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               </div>
