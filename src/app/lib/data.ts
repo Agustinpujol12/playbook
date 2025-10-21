@@ -53,6 +53,60 @@ export const maps: MapInfo[] = [
 ];
 
 export const strategies: Strategy[] = [
+    {
+    id: "mir-tt-pistol-exec-b",
+    mapId: "mirage",
+    side: "TT",
+    category: "Pistol",
+    name: "Pistol Exec B",
+    description: "Setup estándar para defender el sitio de B, controlando los puntos de entrada principales y preparando un retake coordinado.",
+    imageUrl: "https://picsum.photos/seed/infdefb/800/600",
+    imageHint: "top-down map",
+    grenadesNeeded: ["1x Humo", "2x Flash"],
+    players: [
+      { playerTag: "R4N", roleDescription: "" },
+      { playerTag: "leo", roleDescription: "" },
+      { playerTag: "mnz", roleDescription: "" },
+      { playerTag: "kiritox", roleDescription: "" },
+      { playerTag: "Mauriz", roleDescription: "" }
+    ]
+  },
+    {
+    id: "inf-ct-default-b",
+    mapId: "mirage",
+    side: "TT",
+    category: "Default",
+    name: "Defensa Default de B",
+    description: "Setup estándar para defender el sitio de B, controlando los puntos de entrada principales y preparando un retake coordinado.",
+    imageUrl: "https://picsum.photos/seed/infdefb/800/600",
+    imageHint: "top-down map",
+    grenadesNeeded: ["1x Incendiario", "1x Humo", "2x Flash"],
+    players: [
+      { playerTag: "R4N", roleDescription: "" },
+      { playerTag: "leo", roleDescription: "" },
+      { playerTag: "mnz", roleDescription: "" },
+      { playerTag: "kiritox", roleDescription: "" },
+      { playerTag: "Mauriz", roleDescription: "" }
+    ]
+  },
+    {
+    id: "inf-ct-default-b",
+    mapId: "mirage",
+    side: "TT",
+    category: "Strats",
+    name: "Defensa Default de B",
+    description: "Setup estándar para defender el sitio de B, controlando los puntos de entrada principales y preparando un retake coordinado.",
+    imageUrl: "https://picsum.photos/seed/infdefb/800/600",
+    imageHint: "top-down map",
+    grenadesNeeded: ["1x Incendiario", "1x Humo", "2x Flash"],
+    players: [
+      { playerTag: "R4N", roleDescription: "" },
+      { playerTag: "leo", roleDescription: "" },
+      { playerTag: "mnz", roleDescription: "" },
+      { playerTag: "kiritox", roleDescription: "" },
+      { playerTag: "Mauriz", roleDescription: "" }
+    ]
+  },
 {
   id: "d2-tt-pistol-split-b",
   mapId: "dust2",
@@ -61,12 +115,7 @@ export const strategies: Strategy[] = [
   name: "Split B por Túneles y Puertas",
   description: "Ejecución rápida en ronda de pistolas para tomar el sitio de B con una entrada dividida. El objetivo es abrumar al CT de B con velocidad y superioridad numérica.",
   videoUrl: "https://www.youtube.com/embed/Jp1gPiIQ38E",
-
-  // --- LÍNEAS MODIFICADAS ---
   hoverVideoUrl: "/gif/splitl_mirage.mp4",
-  // Se eliminaron imageUrl y imageHint para usar el video.
-  // --- FIN DE LA MODIFICACIÓN ---
-
   grenadesNeeded: ["1x Flash para salir de túnel", "1x Molotov para puertas", "1x Humo para ventana de B"],
   players: [
     { playerTag: "R4N", roleDescription: "Entry Fragger #1 (Túneles). Pide la flash y entra primero para limpiar el sitio. Busca el primer contacto." },
