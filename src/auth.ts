@@ -1,21 +1,25 @@
 // src/auth.ts
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
+
+// NOTA: Borramos la importación del adaptador para usar sesiones basadas en cookies.
+// import { PrismaAdapter } from '@next-auth/prisma-adapter'; 
+
 import prisma from '@/app/lib/prisma';
 import NextAuth, { getServerSession } from 'next-auth';
-import { authOptions } from './auth.config';
+// ✅ Importación corregida con la extensión del archivo
+import { authOptions } from './auth.config'; 
 import { signIn as nextSignIn, signOut as nextSignOut } from 'next-auth/react';
 
-const options = {
-  adapter: PrismaAdapter(prisma),
-  ...authOptions,
-};
+// ❌ Quitamos el bloque 'options' que usaba el adaptador de Prisma.
+// Ahora pasamos 'authOptions' directamente.
 
 // Handler para las rutas API (Next.js route handler)
-const { handlers } = NextAuth(options);
+// Pasamos las authOptions directamente.
+const { handlers } = NextAuth(authOptions); 
 export { handlers };
 
 // Función para obtener la sesión en el servidor (SSR)
-export const auth = () => getServerSession(options);
+// Pasamos las authOptions directamente.
+export const auth = () => getServerSession(authOptions); 
 
 // Funciones para login/logout en el cliente
 export const signIn = nextSignIn;
