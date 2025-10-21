@@ -53,15 +53,16 @@ export const maps: MapInfo[] = [
 ];
 
 export const strategies: Strategy[] = [
-    {
+    // ------------------------------------------------- MIRAGE TT -------------------------------------------------
+  {
     id: "mir-tt-pistol-exec-b",
     mapId: "mirage",
     side: "TT",
     category: "Pistol",
     name: "Pistol Exec B",
     description: "Setup estándar para defender el sitio de B, controlando los puntos de entrada principales y preparando un retake coordinado.",
-    imageUrl: "https://picsum.photos/seed/infdefb/800/600",
-    imageHint: "top-down map",
+    videoUrl: "https://www.youtube.com/embed/Jp1gPiIQ38E",
+    hoverVideoUrl: "/gif/splitl_mirage.mp4",
     grenadesNeeded: ["1x Humo", "2x Flash"],
     players: [
       { playerTag: "R4N", roleDescription: "" },
@@ -72,15 +73,15 @@ export const strategies: Strategy[] = [
     ]
   },
     {
-    id: "inf-ct-default-b",
+    id: "mir-tt-default", // ID Corregido para ser único
     mapId: "mirage",
     side: "TT",
     category: "Default",
-    name: "Defensa Default de B",
-    description: "Setup estándar para defender el sitio de B, controlando los puntos de entrada principales y preparando un retake coordinado.",
-    imageUrl: "https://picsum.photos/seed/infdefb/800/600",
-    imageHint: "top-down map",
-    grenadesNeeded: ["1x Incendiario", "1x Humo", "2x Flash"],
+    name: "Default TT B", // Nombre cambiado para ser más descriptivo
+    description: "Setup estándar para atacar el sitio de B, controlando los puntos de entrada principales.",
+    videoUrl: "https://www.youtube.com/embed/Jp1gPiIQ38E",
+    hoverVideoUrl: "/gif/splitl_mirage.mp4",
+    grenadesNeeded: ["1x Humo", "2x Flash"],
     players: [
       { playerTag: "R4N", roleDescription: "" },
       { playerTag: "leo", roleDescription: "" },
@@ -90,15 +91,15 @@ export const strategies: Strategy[] = [
     ]
   },
     {
-    id: "inf-ct-default-b",
+    id: "mir-tt-strats-a-split", // ID Corregido para ser único
     mapId: "mirage",
     side: "TT",
     category: "Strats",
-    name: "Defensa Default de B",
-    description: "Setup estándar para defender el sitio de B, controlando los puntos de entrada principales y preparando un retake coordinado.",
-    imageUrl: "https://picsum.photos/seed/infdefb/800/600",
-    imageHint: "top-down map",
-    grenadesNeeded: ["1x Incendiario", "1x Humo", "2x Flash"],
+    name: "Split A desde Palacio y Rampa", // Nombre cambiado para ser más descriptivo
+    description: "Ejecución coordinada para tomar el sitio de A desde dos ángulos diferentes.",
+    videoUrl: "https://www.youtube.com/embed/Jp1gPiIQ38E",
+    hoverVideoUrl: "/gif/splitl_mirage.mp4",
+    grenadesNeeded: ["1x Humo CT", "1x Humo Escaleras", "2x Flash"],
     players: [
       { playerTag: "R4N", roleDescription: "" },
       { playerTag: "leo", roleDescription: "" },
@@ -107,25 +108,28 @@ export const strategies: Strategy[] = [
       { playerTag: "Mauriz", roleDescription: "" }
     ]
   },
-{
-  id: "d2-tt-pistol-split-b",
-  mapId: "dust2",
-  side: "TT",
-  category: "Pistol",
-  name: "Split B por Túneles y Puertas",
-  description: "Ejecución rápida en ronda de pistolas para tomar el sitio de B con una entrada dividida. El objetivo es abrumar al CT de B con velocidad y superioridad numérica.",
-  videoUrl: "https://www.youtube.com/embed/Jp1gPiIQ38E",
-  hoverVideoUrl: "/gif/splitl_mirage.mp4",
-  grenadesNeeded: ["1x Flash para salir de túnel", "1x Molotov para puertas", "1x Humo para ventana de B"],
-  players: [
-    { playerTag: "R4N", roleDescription: "Entry Fragger #1 (Túneles). Pide la flash y entra primero para limpiar el sitio. Busca el primer contacto." },
-    { playerTag: "leo", roleDescription: "Entry Fragger #2 (Túneles). Tira la flash para R4N, entra justo detrás para tradear y asegurar el plante." },
-    { playerTag: "mnz", roleDescription: "Entry Fragger #1 (Puertas). Tira la molotov a las puertas para denegar la visión del CT y cruza hacia plataforma." },
-    { playerTag: "kiritox", roleDescription: "Soporte (Puertas). Entra detrás de mnz, cubre el posible re-peek de puertas y ayuda a controlar el sitio." },
-    { playerTag: "Mauriz", roleDescription: "Lurker / Soporte (Túneles). Tira el humo a ventana desde túneles. Aguanta la posición para cortar la rotación desde medio o A." }
-  ],
-  alternatives: "Si se encuentra fuerte resistencia en túneles, los jugadores pueden rotar hacia puertas para una ejecución de 5 hombres."
-},
+  // ------------------------------------------------- MIRAGE CT -------------------------------------------------
+
+  // ------------------------------------------------- DUST 2 ----------------------------------------------------
+  {
+    id: "d2-tt-pistol-split-b",
+    mapId: "dust2",
+    side: "TT",
+    category: "Pistol",
+    name: "Split B por Túneles y Puertas",
+    description: "Ejecución rápida en ronda de pistolas para tomar el sitio de B con una entrada dividida. El objetivo es abrumar al CT de B con velocidad y superioridad numérica.",
+    videoUrl: "https://www.youtube.com/embed/Jp1gPiIQ38E",
+    hoverVideoUrl: "/gif/splitl_mirage.mp4",
+    grenadesNeeded: ["1x Flash para salir de túnel", "1x Molotov para puertas", "1x Humo para ventana de B"],
+    players: [
+      { playerTag: "R4N", roleDescription: "Entry Fragger #1 (Túneles). Pide la flash y entra primero para limpiar el sitio. Busca el primer contacto." },
+      { playerTag: "leo", roleDescription: "Entry Fragger #2 (Túneles). Tira la flash para R4N, entra justo detrás para tradear y asegurar el plante." },
+      { playerTag: "mnz", roleDescription: "Entry Fragger #1 (Puertas). Tira la molotov a las puertas para denegar la visión del CT y cruza hacia plataforma." },
+      { playerTag: "kiritox", roleDescription: "Soporte (Puertas). Entra detrás de mnz, cubre el posible re-peek de puertas y ayuda a controlar el sitio." },
+      { playerTag: "Mauriz", roleDescription: "Lurker / Soporte (Túneles). Tira el humo a ventana desde túneles. Aguanta la posición para cortar la rotación desde medio o A." }
+    ],
+    alternatives: "Si se encuentra fuerte resistencia en túneles, los jugadores pueden rotar hacia puertas para una ejecución de 5 hombres."
+  },
   {
     id: "d2-ct-eco-stack-a",
     mapId: "dust2",
@@ -164,7 +168,7 @@ export const strategies: Strategy[] = [
     ]
   },
   {
-    id: "inf-ct-default-b",
+    id: "inf-ct-default-b", // ID CORREGIDO
     mapId: "inferno",
     side: "CT",
     category: "Default",

@@ -1,0 +1,53 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  role          String    @default("USER")
+}
+
+model Map {
+  id         String     @id
+  name       String
+  colorHex   String
+  imageUrl   String
+  strategies Strategy[]
+}
+
+model Strategy {
+  id              String       @id
+  name            String
+  description     String
+  side            String
+  category        String
+  videoUrl        String?
+  hoverVideoUrl   String?
+  alternatives    String?
+  grenadesNeeded  String[]
+
+  mapId           String
+  map             Map          @relation(fields: [mapId], references: [id])
+
+  playerRoles     PlayerRole[]
+}
+
+model PlayerRole {
+  id              String   @id @default(cuid())
+  playerTag       String
+  roleDescription String
+
+  strategyId      String
+  strategy        Strategy @relation(fields: [strategyId], references: [id])
+}
