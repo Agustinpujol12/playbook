@@ -5,8 +5,9 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
@@ -36,10 +37,10 @@ model Strategy {
   hoverVideoUrl   String?
   alternatives    String?
   grenadesNeeded  String[]
-
+  
   mapId           String
   map             Map          @relation(fields: [mapId], references: [id])
-
+  
   playerRoles     PlayerRole[]
 }
 
@@ -47,7 +48,7 @@ model PlayerRole {
   id              String   @id @default(cuid())
   playerTag       String
   roleDescription String
-
+  
   strategyId      String
   strategy        Strategy @relation(fields: [strategyId], references: [id])
 }

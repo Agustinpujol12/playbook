@@ -3,19 +3,35 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
-import prisma from '@/app/lib/prisma'; // <-- Importamos nuestro conector
+import prisma from '@/app/lib/prisma';
+import { auth } from '@/auth'; // <-- Obtenemos la sesión del usuario
+import { SignIn, SignOut } from '@/app/components/auth-components'; // <-- Botones de login/logout
 
-// Función para obtener los mapas desde la base de datos
+// Función para obtener los mapas desde Prisma
 async function getMaps() {
   const maps = await prisma.map.findMany();
   return maps;
 }
 
 export default async function Home() {
-  const maps = await getMaps(); // <-- Obtenemos los mapas
+  const maps = await getMaps();
+  const session = await auth(); // <-- Obtenemos la sesión del usuario
 
   return (
     <main className="container mx-auto px-4 py-8 md:py-12">
+      {/* --- SECCIÓN DE LOGIN --- */}
+      <div className="absolute top-4 right-4">
+        {session?.user ? (
+          <div className="flex items-center gap-4">
+            <p className="text-sm text-muted-foreground">{session.user.name}</p>
+            <SignOut />
+          </div>
+        ) : (
+          <SignIn />
+        )}
+      </div>
+      {/* --- FIN DE LOGIN --- */}
+
       <header className="text-center mb-10 md:mb-16">
         <h1 className="font-headline text-4xl md:text-6xl font-bold tracking-tighter">
           R4N Playbook
@@ -46,8 +62,13 @@ export default async function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               </div>
-              <CardHeader className="!p-6 flex-1 flex flex-row justify-between items-center border-t-4" style={{borderColor: 'var(--map-color)'}}>
-                <CardTitle className="font-headline text-2xl tracking-tight">{map.name}</CardTitle>
+              <CardHeader
+                className="!p-6 flex-1 flex flex-row justify-between items-center border-t-4"
+                style={{ borderColor: 'var(--map-color)' }}
+              >
+                <CardTitle className="font-headline text-2xl tracking-tight">
+                  {map.name}
+                </CardTitle>
                 <ArrowRight className="h-6 w-6 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1 group-hover:text-[--map-color]" />
               </CardHeader>
             </Card>
