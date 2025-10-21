@@ -13,8 +13,20 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Contraseña', type: 'password' }
       },
       async authorize(credentials) {
-        if (credentials?.username === 'mnz' && credentials?.password === 'mnz') {
-          // Retornamos el objeto de usuario con el rol para la sesión
+        
+        // 🛑 DEBUG: Mostrar los valores reales que se reciben en el servidor
+        console.log("--- DEBUG AUTH ---");
+        console.log("Credenciales recibidas:", credentials);
+        console.log(`Intentando autenticar usuario: ${credentials?.username}`);
+        console.log("--- FIN DEBUG ---");
+        
+        // Forzamos la conversión a string
+        const username = credentials?.username as string | undefined;
+        const password = credentials?.password as string | undefined;
+
+        // 1. Lógica de verificación:
+        if (username === 'mnz' && password === 'mnz') {
+          // Si las credenciales son válidas, retornamos el objeto de usuario.
           return { 
             id: 'user-1', 
             name: 'Manuel Ortiz', 
@@ -22,6 +34,8 @@ export const authOptions: NextAuthOptions = {
             role: 'EDITOR' 
           } as User; 
         }
+
+        // Si la autenticación falla, retorna null.
         return null;
       },
     }),
