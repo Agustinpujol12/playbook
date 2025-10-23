@@ -1,46 +1,63 @@
 // src/auth.config.ts
+import type { NextAuthOptions, Session, User } from 'next-auth'; // <-- Importación corregida
+import type { JWT } from "next-auth/jwt"; // <-- Importación añadida
+import Credentials from 'next-auth/providers/credentials';
+import prisma from '@/app/lib/prisma';
+import bcrypt from 'bcrypt';
 
-import type { NextAuthOptions, User } from 'next-auth';
-import Credentials from 'next-auth/providers/credentials'; 
-
-export const authOptions: NextAuthOptions = {
-  secret: process.env.AUTH_SECRET,
+export const authConfig = {
   providers: [
     Credentials({
-      name: 'Credenciales',
+      // Añadimos la sección 'credentials' como sugiere Copilot
       credentials: {
-        username: { label: 'Usuario', type: 'text' },
-        password: { label: 'Contraseña', type: 'password' }
+        email: { label: "Email", type: "text" },
+        password: { label: "Contraseña", type: "password" }
       },
       async authorize(credentials) {
-        if (credentials?.username === 'mnz' && credentials?.password === 'mnz') {
-          // Retornamos el objeto de usuario con el rol para la sesión
-          return { 
-            id: 'user-1', 
-            name: 'Manuel Ortiz', 
-            email: 'manuortizz2003@gmail.com',
-            role: 'EDITOR' 
-          } as User; 
+        if (!credentials?.email || !credentials.password) {
+          return null;
         }
+
+        const user = await prisma.user.findUnique({
+          where: { email: credentials.email as string },
+        });
+
+        if (!user || !user.password) {
+          return null;
+        }
+
+        const passwordsMatch = await bcrypt.compare(
+          credentials.password as string,
+          user.password
+        );
+
+        if (passwordsMatch) {
+          // Retornamos el usuario completo que espera PrismaAdapter
+          return user; 
+        }
+
         return null;
       },
     }),
   ],
-  // ⚠️ CRÍTICO: Los callbacks de JWT son necesarios sin el adaptador de DB.
+  pages: {
+    signIn: '/login',
+  },
   callbacks: {
-    async jwt({ token, user }) {
-        if (user && (user as User).role) {
-            token.role = (user as User).role;
-            token.id = user.id;
-        }
-        return token;
+    // Añadimos tipos explícitos como sugiere Copilot
+    jwt({ token, user }: { token: JWT; user?: User }) {
+      if (user) {
+        token.sub = user.id;
+        token.role = user.role;
+      }
+      return token;
     },
-    async session({ session, token }) {
-      if (session.user && token.role) { 
-        (session.user as any).role = token.role;
-        session.user.id = token.id;
+    session({ session, token }: { session: Session; token: JWT }) {
+      if (session.user) {
+        session.user.id = token.sub as string;
+        session.user.role = token.role as string;
       }
       return session;
     },
   },
-};
+} satisfies NextAuthOptions; // <-- Usamos NextAuthOptions en lugar de NextAuthConfig

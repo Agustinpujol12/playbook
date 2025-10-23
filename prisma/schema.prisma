@@ -13,7 +13,8 @@ datasource db {
 model User {
   id            String    @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String    @unique // Ahora es obligatorio y único
+  password      String?   // Campo añadido para la contraseña encriptada
   emailVerified DateTime?
   image         String?
   role          String    @default("USER")

@@ -1,16 +1,14 @@
 // src/auth.ts
+import NextAuth from "next-auth";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import prisma from "@/app/lib/prisma";
+import { authConfig } from "./auth.config";
 
-import NextAuth, { getServerSession } from 'next-auth';
-import { authOptions } from './auth.config'; 
-import { signIn as nextSignIn, signOut as nextSignOut } from 'next-auth/react';
+export const auth = NextAuth({
+  adapter: PrismaAdapter(prisma),
+  session: { strategy: "jwt" },
+  ...authConfig,
+});
 
-// Handler para las rutas API (route.ts)
-const { handlers } = NextAuth(authOptions); 
-export { handlers };
-
-// Funciones para el Server Side (Server Components)
-export const auth = () => getServerSession(authOptions); 
-
-// Funciones para el Client Side (componentes 'use client')
-export const signIn = nextSignIn;
-export const signOut = nextSignOut;
+// Exportamos para App Router API route
+export { auth as GET, auth as POST };
