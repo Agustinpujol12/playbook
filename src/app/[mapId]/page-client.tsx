@@ -69,6 +69,7 @@ export default function PageClient({ map, strategies }: PageClientProps) {
             setCategoryFilter={setCategoryFilter}
             categories={categories}
             session={session} // <-- PASAMOS LA SESIÓN A LA LISTA
+            mapId={map.id} // <-- LÍNEA AÑADIDA
           />
         </aside>
         <main className="w-full md:w-8/12 lg:w-[70%] overflow-y-auto">

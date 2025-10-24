@@ -4,11 +4,12 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/app/lib/prisma";
 import { authConfig } from "./auth.config";
 
-export const auth = NextAuth({
+// ✅ Creamos la instancia de NextAuth normalmente
+const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   ...authConfig,
 });
 
-// Exportamos para App Router API route
-export { auth as GET, auth as POST };
+// ✅ Exportamos los métodos GET y POST para la API Route
+export const { GET, POST } = handler;
