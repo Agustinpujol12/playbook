@@ -1,23 +1,30 @@
-// src/auth.d.ts
-import { DefaultSession, DefaultUser } from "next-auth";
-import { DefaultJWT } from "next-auth/jwt";
+import 'next-auth';
+import { DefaultSession } from 'next-auth';
 
-// Extendemos el tipo 'User' de NextAuth para incluir la propiedad 'role'
-declare module "next-auth" {
-  interface Session {
-    user: {
-      role: string; // <-- Aquí declaramos el rol
-    } & DefaultSession["user"];
+// Extendemos los tipos de 'next-auth'
+declare module 'next-auth' {
+  /**
+   * Extiende el tipo `User` por defecto para añadir la propiedad `role`.
+   */
+  interface User {
+    role: string;
   }
 
-  interface User extends DefaultUser {
-    role: string; // <-- Aquí declaramos el rol
+  /**
+   * Extiende el tipo `Session` para que `session.user` incluya las propiedades
+   * personalizadas `id` y `role` que añadimos en los callbacks.
+   */
+  interface Session {
+    user: {
+      id: string;
+      role: string;
+    } & DefaultSession['user']; // Mantiene las propiedades por defecto (name, email, image)
   }
 }
 
-// Extendemos el tipo 'JWT' de NextAuth para incluir la propiedad 'role'
-declare module "next-auth/jwt" {
-  interface JWT extends DefaultJWT {
-    role: string; // <-- Aquí declaramos el rol
+// Extendemos el tipo JWT para que el token también pueda llevar el rol.
+declare module 'next-auth/jwt' {
+  interface JWT {
+    role: string;
   }
 }

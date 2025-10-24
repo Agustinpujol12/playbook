@@ -8,13 +8,15 @@ import StrategyList from '@/app/components/strategy-list';
 import StrategyDetail from '@/app/components/strategy-detail';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useSession } from 'next-auth/react'; // <-- IMPORTACIÓN AÑADIDA
 
 interface PageClientProps {
   map: MapInfo;
   strategies: (Strategy & { players: PlayerRole[] })[];
 }
 
-export default function PageClient({ map, strategies }: PageClientProps) { // <-- CORREGIDO
+export default function PageClient({ map, strategies }: PageClientProps) {
+  const { data: session } = useSession(); // <-- OBTENEMOS LA SESIÓN DEL USUARIO
   const [selectedStrategy, setSelectedStrategy] = useState<Strategy | null>(strategies[0] ?? null);
   const [sideFilter, setSideFilter] = useState<'TT' | 'CT' | 'all'>('all');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
@@ -66,6 +68,7 @@ export default function PageClient({ map, strategies }: PageClientProps) { // <-
             categoryFilter={categoryFilter}
             setCategoryFilter={setCategoryFilter}
             categories={categories}
+            session={session} // <-- PASAMOS LA SESIÓN A LA LISTA
           />
         </aside>
         <main className="w-full md:w-8/12 lg:w-[70%] overflow-y-auto">

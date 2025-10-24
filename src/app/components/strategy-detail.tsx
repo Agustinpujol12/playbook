@@ -5,8 +5,9 @@ import Image from 'next/image';
 import type { Strategy } from '@/app/lib/types';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Flame, Cloud, Sun, ShieldCheck, GitBranch } from 'lucide-react';
+import { Flame, Cloud, Sun, ShieldCheck, GitBranch, Plus } from 'lucide-react'; // Importado 'Plus'
 import { TtIcon, CtIcon } from './icons';
+import { Button } from '@/components/ui/button'; // Importado 'Button'
 
 interface StrategyDetailProps {
   strategy: Strategy | null;
@@ -90,7 +91,6 @@ export default function StrategyDetail({ strategy }: StrategyDetailProps) {
               </DialogTrigger>
               <DialogContent className="max-w-[90vw] md:max-w-[70vw] lg:max-w-[60vw] p-0 bg-transparent border-none">
                 <div className="relative aspect-video w-full">
-                   {/* --- LÍNEA MODIFICADA --- */}
                    <video
                      src={strategy.hoverVideoUrl}
                      loop
@@ -135,9 +135,14 @@ export default function StrategyDetail({ strategy }: StrategyDetailProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
           {strategy.players.map((player) => (
             <Card key={player.playerTag} className="h-full flex flex-col">
-              <CardHeader>
+              {/* --- SECCIÓN MODIFICADA --- */}
+              <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="font-headline text-lg">{player.playerTag}</CardTitle>
+                <Button variant="ghost" size="icon" className="h-8 w-8">
+                  <Plus className="h-4 w-4" />
+                </Button>
               </CardHeader>
+              {/* --- FIN DE LA SECCIÓN --- */}
               <CardContent className="flex-grow">
                 <p className="text-muted-foreground break-words">{player.roleDescription}</p>
               </CardContent>

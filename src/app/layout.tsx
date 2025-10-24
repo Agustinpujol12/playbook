@@ -1,6 +1,7 @@
+// src/app/layout.tsx
 import type { Metadata } from 'next';
 import './globals.css';
-import { Toaster } from '@/components/ui/toaster';
+import { Providers } from '@/app/components/providers'; // <-- Importamos el nuevo componente
 
 export const metadata: Metadata = {
   title: 'R4N Playbook',
@@ -23,8 +24,10 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased">
-        {children}
-        <Toaster />
+        {/* Usamos el componente Providers para envolver la aplicación */}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import type { Strategy, Side } from '@/app/lib/types';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,6 +14,21 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { TtIcon, CtIcon } from '@/app/components/icons';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
+import { Plus, Check, X } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from "@/hooks/use-toast";
+import { Session } from 'next-auth';
 
 interface StrategyListProps {
   strategies: Strategy[];
@@ -23,6 +39,7 @@ interface StrategyListProps {
   categoryFilter: string;
   setCategoryFilter: (category: string) => void;
   categories: string[];
+  session: Session | null; // <-- Prop para recibir la sesión
 }
 
 export default function StrategyList({
@@ -34,11 +51,78 @@ export default function StrategyList({
   categoryFilter,
   setCategoryFilter,
   categories,
+  session, // <-- Se recibe la sesión
 }: StrategyListProps) {
+  const { toast } = useToast();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  // Lógica para manejar el clic en "Agregar Jugada"
+  const handleAddStrategyClick = () => {
+    if (session?.user?.role === 'ADMIN') {
+      setIsDialogOpen(true);
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Acceso Denegado",
+        description: "Solo los administradores pueden agregar nuevas jugadas.",
+      });
+    }
+  };
+
   return (
     <div className="flex flex-col h-full bg-card">
       <div className="p-4 border-b">
-        <h2 className="font-headline text-lg font-semibold mb-4">Jugadas</h2>
+        {/* --- SECCIÓN MODIFICADA CON LÓGICA DE PERMISOS --- */}
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="font-headline text-lg font-semibold">Jugadas</h2>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <Button size="sm" onClick={handleAddStrategyClick}> {/* El DialogTrigger es reemplazado por un botón normal con onClick */}
+              <Plus className="h-4 w-4 mr-2" />
+              Agregar Jugada
+            </Button>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Agregar Nueva Jugada</DialogTitle>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="name" className="text-right">Nombre</Label>
+                  <Input id="name" placeholder="Ej: Fast A Rush" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="video" className="text-right">Video</Label>
+                  <Input id="video" placeholder="URL del video en YouTube" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="gif" className="text-right">Gif</Label>
+                  <Input id="gif" placeholder="URL/ruta del video corto" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="requerimiento" className="text-right">Requerimiento</Label>
+                  <Textarea id="requerimiento" placeholder="Granadas necesarias, separadas por comas" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="alternativa" className="text-right">Alternativa</Label>
+                  <Textarea id="alternativa" placeholder="Plan B si la jugada principal falla" className="col-span-3" />
+                </div>
+              </div>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button type="button" variant="outline">
+                    <X className="h-4 w-4 mr-2" />
+                    Cancelar
+                  </Button>
+                </DialogClose>
+                <Button type="submit">
+                  <Check className="h-4 w-4 mr-2" />
+                  Aceptar
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
+        {/* --- FIN DE LA SECCIÓN MODIFICADA --- */}
+        
         <div className="flex flex-col gap-4">
           <div className="grid grid-cols-3 gap-2">
             <Button
